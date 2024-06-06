@@ -1,0 +1,28 @@
+<section class="section">
+    <div class="row">
+  
+      <app-dashboard-item-search (searchStockEvent)="handleSearch($event)"></app-dashboard-item-search>
+  
+      <ng-container *ngIf="(stock$ | async) as stock">
+        <div class="content mt-4 mb-5">
+          <div class="container-fluid pe-0 ps-0">
+            <div class="card shadow card-solid">
+              <div class="card-header card-header-padding p-2">
+                <h6 class="float-start m-0 mt-1 ms-2 font-weight-bold">
+                  {{'dashboard.liste' | translate}}
+                </h6>
+                <span class="ms-2 badge button-color">({{stock.length}})</span>
+              </div>
+              <div class="card-body p-0 bg-white">
+                <div class="alert alert-danger" *ngIf="errorMsg">
+                  {{ errorMsg }}
+                </div>
+                <app-dashboard-item [stockDtos]="stock" (updateResult)="handleUpdate($event)"></app-dashboard-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+  

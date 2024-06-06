@@ -1,0 +1,93 @@
+<div class="card mb-4" >
+  <div class="card-header" style="padding: 10px 10px 10px 10px">
+    <div class="float-left">
+      <h4>{{'search' | translate}}</h4>
+    </div>
+
+    <div class="float-right">
+      <button class="btn  btn-primary" (click)="refresh()">
+        <span class="fa fa-search"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body" >
+
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="searchArticleForm">
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">
+                  {{'article.serialCode' | translate}}
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'article.serialCode' | translate}}" formControlName="serialCode">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">
+                  {{'article.name' | translate}}
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'article.name' | translate}}" formControlName="name">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">
+                  {{'article.barCode' | translate}}
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'article.barCode' | translate}}" formControlName="barCode">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">
+                  {{'article.active' | translate}}
+                </label>
+                <select name="active" id="active" class="form-control" formControlName="isActif">
+                  <option value="1">{{'yes' | translate}}</option>
+                  <option value="0">{{'no' | translate}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-3">
+               <div class="form-group">
+                 <label class="control-label">
+                   {{'order' | translate}}
+                 </label>
+                 <select class="form-control" formControlName="order">
+                   <option [value]="1">{{'order_croissant' | translate}}</option>
+                   <option [value]="0">{{'order_decroissant' | translate}}</option>
+                 </select>
+               </div>
+             </div>-->
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">
+                  {{'resultMax' | translate}}
+                </label>
+                <select class="form-control" formControlName="limit" >
+                  <option value="10">10</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                  <option value="500">500</option>
+                  <option value="1000">1000</option>
+                  <option value="-1">{{'tous' | translate}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

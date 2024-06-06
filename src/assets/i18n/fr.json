@@ -1,0 +1,66 @@
+{
+  "button": {
+    "cancel": "ANNULER",
+    "save": "ENREGISTRER",
+    "actif": "actif",
+    "nonActif": "inactif",
+    "encours": "En cours",
+    "terminer": "Terminer",
+    "edit": "MODIFIER",
+    "detail": "DETAILS",
+    "details": "DETAILS",
+    "validated": "Valider",
+    "logout": "Se Déconnecter",
+    "edit_user": "MODIFIER",
+    "addRoleUser": "Ajouter un Role",
+    "reset_password": "Réinitialiser le mot de passe",
+    "list_role": "Liste de role",
+    "view": "Details",
+    "delete": "Supprimer"
+  },
+
+  "user": {
+    "users": "Gestion des Utilisateurs",
+    "add_user": "AJOUTER UN UTILISATEUR",
+    "login": "Login",
+    "phoneNumber": "Telephone",
+    "email": "Email",
+    "list": "Liste Des Utilisateurs",
+    "number": "Numero",
+    "name": "Nom",
+    "detail": "Detail de:",
+    "update_user": "Modifier l'utilisateur:",
+    "phone": "Telephone",
+    "address": "Address",
+    "adresse": "ADRESSE",
+    "roles_is_empty": "Aucun autre role trouver",
+    "reset_password": {
+      "title_message": "Vous êtes sur le point de réinitialiser le mot de passe de",
+      "select_message": "Sélectionnez \"Réinitialiser le mot de passe\" pour confirmer votre opération.",
+      "password_user_init": "Le mot de passe de l'utilisateur sera 12345"
+    }
+  },
+
+  "sidebar": {
+    "dashboard": "ACCUEIL",
+    "acceuil": "Retouner a l'accueil",
+    "tableauDeBord": "TABLEAUX DE BORD",
+    "Parametre": "PARAMETRE",
+    "users": "Gestion des Utilisateurs",
+    "add_user": "AJOUTER UN UTILISATEUR",
+    "User": "Gerer utilisateur"
+  },
+
+  "logout": {
+    "title_message": "Vous êtes sur le point de vous deconnecter de la plateforme",
+    "select_message": "Vous êtes sur le point de vous déconnecter de la plateforme."
+  },
+
+  "change_password": {
+    "confirmPassword": "Confirmer le mots de passe",
+    "newPassword": "Nouveau Mot de passe",
+    "oldPassword": "Ancien Mot de paase",
+    "etablissement": "ETABLISSEMENT"
+  }
+}
+

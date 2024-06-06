@@ -1,0 +1,14 @@
+<div *ngIf="form.get(field)?.invalid && (form.get(field)?.dirty || form.get(field)?.touched)">
+  <small class="form-text text-danger fw-bold validate-fields"
+         *ngIf="form.get(field)?.errors?.['required']">
+    {{message | translate}}
+  </small>
+  <small class="form-text text-danger fw-bold validate-fields"
+         *ngIf="minlength && form.get(field)?.errors?.['minlength']">
+    {{messageMinlength | translate}}
+  </small>
+  <small class="form-text text-danger fw-bold validate-fields"
+         *ngIf="maxlength && form.get(field)?.errors?.['maxlength']">
+    {{messageMaxlength | translate}}
+  </small>
+</div>

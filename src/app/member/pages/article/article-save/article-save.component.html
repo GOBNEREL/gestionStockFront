@@ -1,0 +1,80 @@
+<form role="form" [formGroup]="articleForm" novalidate (ngSubmit)="saveArticle()">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header p-1" *ngIf="!errorsMsg.length">
+        <h5 class="modal-title font-weight-bold" *ngIf="articleDto?.id == null"> {{'article.add' | translate}}</h5>
+        <h5 class="modal-title font-weight-bold" *ngIf="articleDto?.id">{{'article.edit' | translate}}</h5>
+        <button type="button" class="btn-close me-1 p-1" aria-label="Close" (click)="cancle()"></button>
+      </div>
+      <div class="modal-header p-1" *ngIf="errorsMsg.length">
+        <div class="p-3 alert alert-danger col-md-12" *ngIf="errorsMsg && errorsMsg.length > 0">
+          <button type="button" class="btn-close me-1 p-1 float-end" aria-label="Close" (click)="cancle()"></button>
+          <ng-container *ngFor="let error of errorsMsg">
+            <span class="d-block">{{error}}</span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="ArticleName"> {{'article.name' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="text" class="form-control field-font-header p-1" name="name" id="ArticleName" placeholder="{{'article.articleName' | translate}}" formControlName="name"/>
+              <div *ngIf="articleForm.get('name')?.invalid && (articleForm.get('name')?.dirty || articleForm.get('name')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="articleForm.get('name')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="ArticlePrice"> {{'article.price' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="number" class="form-control field-font-header p-1" name="price" id="ArticlePrice" placeholder="{{'article.articlePrice' | translate}}" formControlName="price"/>
+              <div *ngIf="articleForm.get('price')?.invalid && (articleForm.get('price')?.dirty || articleForm.get('price')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="articleForm.get('price')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12 mb-3">
+            <label class="control-label field-font">{{'article.category' | translate}}<span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+            <ng-select [searchable]="true" placeholder="{{'article.selectMessage' | translate}}" [clearable]="true" class="control-label" name="category" formControlName="category" [id]="'categorySelected'" (input)="filterCategory($event)" (clear)="onClearableCategory()">
+              <ng-option *ngFor="let category of listCategory$" [value]="category.name">{{ category.name}}</ng-option>
+            </ng-select>
+            <app-form-validation [form]="articleForm"></app-form-validation>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="ArticleDescription"> {{'article.description' | translate}} </label>
+              <textarea class="form-control" placeholder="{{'article.articleDescription' | translate}}" name="description" id="ArticleDescription" style="height: 100px;" formControlName="description"></textarea>
+              <div *ngIf="articleForm.get('description')?.invalid && (articleForm.get('description')?.dirty || articleForm.get('description')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="articleForm.get('description')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-sm btn-secondary float-start" data-dismiss="modal" (click)="cancle()">
+              <em class="bi bi-stop-circle"></em>&nbsp;
+              <span>{{'button.cancel' | translate}}</span>
+            </button>
+            <button type="submit" [disabled]="isSaving || articleForm.invalid" class="btn btn-sm float-end button-color" >
+              <em class="bi bi-save"></em>&nbsp;
+              <span>{{'button.save' | translate}}</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+

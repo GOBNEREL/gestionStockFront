@@ -1,0 +1,52 @@
+<form role="form" [formGroup]="supplierForm" novalidate (ngSubmit)="saveSupplier()">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header p-1" *ngIf="!errorsMsg.length">
+        <h5 class="modal-title font-weight-bold" *ngIf="supplierDto?.id">{{'supplier.details' | translate}}</h5>
+        <button type="button" class="btn-close me-1 p-1" aria-label="Close" (click)="cancle()"></button>
+      </div>
+      <div class="modal-header p-1" *ngIf="errorsMsg.length">
+        <div class="p-3 alert alert-danger col-md-12" *ngIf="errorsMsg && errorsMsg.length > 0">
+          <button type="button" class="btn-close me-1 p-1 float-end" aria-label="Close" (click)="cancle()"></button>
+          <ng-container *ngFor="let error of errorsMsg">
+            <span class="d-block">{{error}}</span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="SupplierName"> {{'supplier.name' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="text" class="form-control field-font-header p-1" name="name" id="SupplierName" style="font-weight: bolder;" placeholder="{{supplierDto.name}}" disabled/>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="SupplierPhoneNumber"> {{'supplier.phoneNumber' | translate}} </label>
+              <input type="number" class="form-control field-font-header p-1" placeholder="{{supplierDto.phoneNumber}}" style="font-weight: bolder;" name="phoneNumber" id="SupplierPhoneNumber" disabled/>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="SupplierDescription"> {{'supplier.description' | translate}} </label>
+              <textarea class="form-control" placeholder="{{supplierDto.description}}" name="description" id="SupplierDescription" style="font-weight: bolder;" style="height: 100px;" disabled></textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-sm btn-secondary float-start" data-dismiss="modal" (click)="cancle()">
+              <em class="bi bi-stop-circle"></em>&nbsp;
+              <span>{{'button.cancel' | translate}}</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+

@@ -1,0 +1,60 @@
+<form role="form" [formGroup]="categoryForm" novalidate (ngSubmit)="saveCategory()">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header p-1" *ngIf="!errorsMsg.length">
+        <h5 class="modal-title font-weight-bold" *ngIf="categoryDto?.id == null"> {{'category.add' | translate}}</h5>
+        <h5 class="modal-title font-weight-bold" *ngIf="categoryDto?.id">{{'category.edit' | translate}}</h5>
+        <button type="button" class="btn-close me-1 p-1" aria-label="Close" (click)="cancle()"></button>
+      </div>
+      <div class="modal-header p-1" *ngIf="errorsMsg.length">
+        <div class="p-3 alert alert-danger col-md-12" *ngIf="errorsMsg && errorsMsg.length > 0">
+          <button type="button" class="btn-close me-1 p-1 float-end" aria-label="Close" (click)="cancle()"></button>
+          <ng-container *ngFor="let error of errorsMsg">
+            <span class="d-block">{{error}}</span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="CategoryName"> {{'category.name' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="text" class="form-control field-font-header p-1" name="name" id="CategoryName" placeholder="{{'category.categoryName' | translate}}" formControlName="name"/>
+              <div *ngIf="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.dirty || categoryForm.get('name')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="categoryForm.get('name')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="CategoryDescription"> {{'category.description' | translate}} </label>
+              <textarea class="form-control" placeholder="{{'category.categoryDescription' | translate}}" name="description" id="CategoryDescription" style="height: 100px;" formControlName="description"></textarea>
+              <div *ngIf="categoryForm.get('description')?.invalid && (categoryForm.get('description')?.dirty || categoryForm.get('description')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="categoryForm.get('description')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-sm btn-secondary float-start" data-dismiss="modal" (click)="cancle()">
+              <em class="bi bi-stop-circle"></em>&nbsp;
+              <span>{{'button.cancel' | translate}}</span>
+            </button>
+            <button type="submit" [disabled]="isSaving || categoryForm.invalid" class="btn btn-sm float-end button-color" >
+              <em class="bi bi-save"></em>&nbsp;
+              <span>{{'button.save' | translate}}</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+

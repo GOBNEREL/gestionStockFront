@@ -1,0 +1,30 @@
+<section class="section">
+    <div class="row">
+  
+      <app-button-actions (newEvent)="openModal()" [buttonName]="'supplierOrder.add' | translate"></app-button-actions>
+  
+      <app-supplier-order-item-search (searchSupplierOrderEvent)="handleSearch($event)"></app-supplier-order-item-search>
+  
+      <ng-container *ngIf="(supplierOrder$ | async) as supplierOrder">
+        <div class="content mt-4 mb-5">
+          <div class="container-fluid pe-0 ps-0">
+            <div class="card shadow card-solid">
+              <div class="card-header card-header-padding p-2">
+                <h6 class="float-start m-0 mt-1 ms-2 font-weight-bold">
+                  {{'supplierOrder.liste' | translate}}
+                </h6>
+                <span class="ms-2 badge button-color">({{supplierOrder.length}})</span>
+              </div>
+              <div class="card-body p-0 bg-white">
+                <div class="alert alert-danger" *ngIf="errorMsg">
+                  {{ errorMsg }}
+                </div>
+                <app-supplier-order-item [supplierOrderDtos]="supplierOrder" (updateResult)="handleUpdate($event)"></app-supplier-order-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+  

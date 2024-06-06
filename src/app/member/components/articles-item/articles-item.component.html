@@ -1,0 +1,47 @@
+<ng-template #notFound>
+  <div class="alert alert-warning">
+    <span>{{'article.notFound' | translate}}</span>
+  </div>
+   </ng-template>
+
+<table *ngIf="storagesDto && storagesDto.length > 0; else notFound" class="table table-vcenter table-mobile-md card-table">
+  <thead>
+  <tr>
+    <th>{{'article.serialCode' | translate}}</th>
+    <th>{{'article.barCode' | translate}}</th>
+    <th>{{'article.name' | translate}}</th>
+    <th>{{'article.price' | translate}}</th>
+    <th>{{'article.quantity' | translate}}</th>
+    <th>{{'article.quantifiable' | translate}}</th>
+    <th>{{'article.active' | translate}}</th>
+    <th>{{'action' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let storgage of storagesDto; trackBy: trackBy">
+    <td>{{storgage.article?.serialCode}}</td>
+    <td>{{storgage.article?.barCode}}</td>
+    <td>{{storgage.article?.name}}</td>
+    <td>{{storgage.price}}</td>
+    <td>{{storgage.quantity}}</td>
+    <td>{{isQuantifiable(storgage.article?.isQuantifiable)}}</td>
+    <td>{{isActif(storgage.article?.isActif)}}</td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+          {{'action' | translate}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item pointer" (click)="updateModal(storgage)">
+            {{'button.edit' | translate}}
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item pointer"  (click)="detailModal(storgage)">
+            {{'button.view' | translate}}
+          </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

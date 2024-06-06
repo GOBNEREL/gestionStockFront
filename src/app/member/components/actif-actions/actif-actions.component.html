@@ -1,0 +1,38 @@
+
+<button (click)="confirmCloseBoxExp()" [disabled]="readonly" *ngIf = "isClose" class="btn btn-sm btn-warning mt-4 me-1 text-white">
+  <em class="bi bi-lock"></em>
+  <span>{{'button.cloturer' | translate}}</span>
+</button>
+<!--  -->
+<button (click)="confirmCloseBoxExp()" [disabled]="readonly" *ngIf = "isValidated" class="btn btn-sm btn-warning mt-4 me-1 text-white">
+  <em class="bi bi-lock"></em>
+  <span class="mx-2">{{'button.cloturer' | translate}}</span>
+</button>
+
+
+<a (click)="confirmCloseBoxExp()"  class="dropdown-item pointer" *ngIf = "isRetour">
+  <span>{{'expedition.faire_retour' | translate}}</span>
+</a>
+
+<a (click)="confirmCloseBoxExp()"  class="dropdown-item pointer" *ngIf = "islogout">
+  <i class="bi bi-box-arrow-right"></i>
+  <span>{{'button.logout' | translate}}</span>
+</a>
+
+<a (click)="confirmCloseBoxExp()"  class="dropdown-item pointer" *ngIf = "isClotureItem">
+  <span>{{'button.cloturer' | translate}}</span>
+</a>
+
+
+
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "isActif && activation && entity == 'category'"  class = "btn btn-sm btn-primary">{{'button.actif' | translate}}</button>
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "!isActif && activation && entity == 'category'"  class = "btn btn-sm btn-danger">{{'button.notActif' | translate}}</button>
+
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "!isActif && activation && entity == 'order'"  class = "btn btn-sm btn-primary">{{'button.received' | translate}}</button>
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "isActif && activation && entity == 'order'"  class = "btn btn-sm btn-danger">{{'button.pending' | translate}}</button>
+
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "isActif && activation && entity == 'projet'"  class = "btn btn-sm btn-primary">{{'button.encours' | translate}}</button>
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "!isActif && activation && entity == 'projet'"  class = "btn btn-sm btn-danger">{{'button.terminer' | translate}}</button>
+
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "isActif && activation && entity == 'user'"  class = "btn btn-sm btn-primary">{{'button.actif' | translate}}</button>
+<button (click)="confirmBox()" [disabled]="readonly" *ngIf = "!isActif && activation && entity == 'user'"  class = "btn btn-sm btn-danger">{{'button.nonActif' | translate}}</button>

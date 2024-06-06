@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  skystagiaire-frontend:
+    image: registry.gitlab.com/devskysofttechnology/skystagiare/skystagiaire_frontend:latest
+    labels:
+      com.docker.stack.namespace: "devops"
+    environment:
+      SERVER_API_URL: "https://sky-stagiaire-api.skysoftcm.com"
+    networks:
+      - devops_web_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+
+
+networks:
+  devops_web_network:
+    name: devops_web_network

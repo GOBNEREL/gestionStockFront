@@ -1,0 +1,102 @@
+<div class="card mb-4" >
+  <div class="card-header">
+    <div class="float-start">
+      <h3 class="font-weight-bold mt-1 ms-2">{{'search' | translate}}</h3>
+    </div>
+
+    <div class="float-end">
+      <button class="btn btn-sm button-color" (click)="refresh()">
+        <span class="bi bi-search"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body" >
+
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="searchForm">
+
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <div class="form-group">
+                <label class="control-label field-font">
+                  {{'user.login' | translate}}
+                </label>
+                <input type="text" class="form-control" placeholder="{{'user.login' | translate}}" formControlName="login">
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="form-group">
+                <label class="control-label field-font">
+                  {{'user.name' | translate}}
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'user.name' | translate}}" formControlName="name">
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="form-group">
+                <label class="control-label field-font">
+                  {{'user.phoneNumber' | translate}}
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'user.phoneNumber' | translate}}" formControlName="phoneNumber">
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="form-group field-font">
+                <label class="control-label">
+                  {{'user.email' | translate}}
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'user.email' | translate}}" formControlName="email">
+              </div>
+            </div>
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--              <div class="form-group field-font">-->
+<!--                <label class="control-label">-->
+<!--                  {{'type_order' | translate}}-->
+<!--                </label>-->
+<!--                <select class="form-select" formControlName="type_order">-->
+<!--                  <option [value]="'id'">{{'creation' | translate}}</option>-->
+<!--                  <option [value]="'nom'">{{'user.name' | translate}}</option>-->
+<!--                  <option [value]="'login'">{{'user.login' | translate}}</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+
+            <div class="col-md-3 mb-3">
+              <div class="form-group">
+                <label class="control-label field-font">
+                  {{'type_order' | translate}}
+                </label>
+                <select class="form-select" formControlName="order">
+                  <option [value]="1">{{'order_croissant' | translate}}</option>
+                  <option [value]="0">{{'order_decroissant' | translate}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <div class="form-group">
+                <label class="control-label field-font">
+                  {{'resultMax' | translate}}
+                </label>
+                <select class="form-select" formControlName="resultMax" >
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                  <option value="300">300</option>
+                  <option value="500">500</option>
+                  <option value="1000">1000</option>
+                  <option [value]="''">{{'all' | translate}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

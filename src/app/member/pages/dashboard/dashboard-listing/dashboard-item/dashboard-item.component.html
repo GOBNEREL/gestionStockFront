@@ -1,0 +1,43 @@
+<div [class]="stockDtos.length > 0 ? 'm-0' : 'p-3'">
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <span>{{'stock.notFound' | translate}}</span>
+      </div>
+    </ng-template>
+
+  <table class="table table-striped card-table table-hover table table-mobile-md text-center"
+         *ngIf="stockDtos && stockDtos.length > 0; else notFound">
+    <thead class="table-light  field-font-header">
+    <tr>
+      <th id="Numero">{{'stock.numero' | translate}}</th>
+      <th id="Numero"></th>
+      <th id="name">{{'stock.name' | translate}}</th>
+      <th id="Numero"></th>
+      <th id="quantity">{{'stock.quantity' | translate}}</th>
+      <th id="Numero"></th>
+      <th id="notice">{{'stock.notice' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let stock of stockDtos | paginate: { itemsPerPage: 50, currentPage: gridListings }; let i=index; trackBy: trackBy">
+      <td>{{i+1}}</td>
+      <td></td>
+      <td>{{stock.name != null ? stock.name : '-'}}</td>
+      <td></td>
+      <td>{{stock.quantity != null ? stock.quantity : '-'}}</td>
+      <td></td>
+      <td>
+        <button *ngIf = "stock.quantity <= 5"  class = "btn btn-sm btn-danger">{{'button.danger' | translate}}</button>
+        <button *ngIf = "stock.quantity <= 10 && stock.quantity  > 5"  class = "btn btn-sm btn-warning">{{'button.warning' | translate}}</button>
+        <button *ngIf = "stock.quantity  > 10"  class = "btn btn-sm btn-primary">{{'button.primary' | translate}}</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="stockDtos">
+    <div class="pagination-area text-center">
+      <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+    </div>
+  </div>

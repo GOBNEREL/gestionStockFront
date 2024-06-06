@@ -1,0 +1,47 @@
+<form novalidate="novalidate">
+  <div class="modal-content" data-backdrop="false">
+    <div class="modal-header">
+      <h5 class="modal-title modal-title font-weight-bold">
+        {{'user.detail' | translate}} {{userDto.nom}}
+      </h5>
+      <button type="button" class="btn-close me-1 p-1" data-dismiss="modal" aria-label="Close" (click)="exit()"></button>
+
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row">
+
+
+          <div class="form-group col-md-6 mb-3">
+            <label for="login" class="control-label field-font pb-1">
+              {{'user.login' | translate}}</label>
+            <input type="text" disabled id="login" class="form-control" [ngModel]="userDto.login" [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <div class="form-group col-md-6 mb-3">
+            <label for="name" class="control-label field-font pb-1">
+              {{'user.name' | translate}}</label>
+            <input type="text" disabled id="name" class="form-control" [ngModel]="userDto.nom" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="email" class="control-label field-font pb-1">
+              {{'user.email' | translate}}</label>
+            <input type="text" disabled id="email" class="form-control" [ngModel]="userDto.email" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="phoneNumber" class="control-label field-font pb-1">
+              {{'user.phoneNumber' | translate}}
+            </label>
+            <input type="text" disabled name="phoneNumber" id="phoneNumber" class="form-control" [ngModel]="userDto.phone" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm btn-secondary" type="reset" data-dismiss="modal" (click)="exit()">
+        <em class="bi bi-stop-circle"></em>&nbsp;{{'button.cancel' | translate}}
+      </button>
+    </div>
+  </div>
+</form>
+

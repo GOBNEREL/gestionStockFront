@@ -1,0 +1,53 @@
+<form class="row g-3 needs-validation" novalidate [formGroup]="loginForm">
+
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+
+  <div class="col-12">
+    <label for="yourLogin" class="control-label field-font pb-1">User name <span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+    <input type="text" name="login" class="form-control" placeholder="Enter your user name..." id="yourLogin" required formControlName="login">
+    <app-form-validation [form]="loginForm"
+                         [field]="'login'"
+                         [minlength]="true"
+                         [maxlength]="true"
+                         [message]="'Enter your user name.'"
+                         [messageMinlength]="'The user name must be at least 4 characters.'"
+                         [messageMaxlength]="'The user name must not have more than 50 characters.'" ></app-form-validation>
+  </div>
+
+  <div class="col-12">
+    <label for="yourPassword" class="control-label field-font pb-1">Password <span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+    <input type="password" name="password" class="form-control" placeholder="Enter your password..." id="yourPassword" required formControlName="password">
+    <app-form-validation [form]="loginForm"
+                         [field]="'password'"
+                         [minlength]="true"
+                         [maxlength]="true"
+                         [message]="'Enter your password.'"
+                         [messageMinlength]="'The password must be at least 4 characters.'"
+                         [messageMaxlength]="'The password must not have more than 50 cgaracters.'" ></app-form-validation>
+  </div>
+
+  <div class="col-12" *ngIf="otpVisible">
+    <label for="otp" class="control-label field-font pb-1">Code OTP <span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+    <input [readonly]="!otpVisible" type="text" name="otp" class="form-control" id="otp" placeholder="Enter le code OTP..." required formControlName="otp">
+    <app-form-validation [form]="loginForm"
+                         [field]="'otp'"
+                         [minlength]="true"
+                         [maxlength]="true"
+                         [message]="'Veuillez renseigner le code OTP.'"
+                         [messageMinlength]="'Le code OTP doit comporter au moins 4 caractères.'"
+                         [messageMaxlength]="'Le code OTP ne doit pas comporter plus de 4 caractères.'" ></app-form-validation>
+  </div>
+
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" [checked]="true" type="checkbox" name="remember" value="true" id="rememberMe">
+      <label class="form-check-label field-font pb-1" for="rememberMe">Remember me</label>
+    </div>
+  </div>
+  <div class="col-12 mb-5">
+    <button (click)="loginWithUsernameAndPassword()" [disabled]="isSaving || loginForm.invalid" *ngIf="!otpVisible" class="btn button-color w-100" type="submit">Sign In</button>
+    <!-- <button (click)="loginWithOtp()" *ngIf="otpVisible" [disabled]="isSaving || loginForm.invalid" class="btn button-color w-100" type="submit">Se connecter</button> -->
+  </div>
+</form>

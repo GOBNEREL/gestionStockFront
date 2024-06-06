@@ -1,0 +1,83 @@
+<div [class]="expeditionsEntity.length > 0 ? 'm-0' : 'p-3'">
+<ng-template #notFound>
+  <div class="alert alert-warning">
+    <span>{{"expedition.notFound" | translate}}</span>
+  </div>
+   </ng-template>
+
+<table *ngIf="expeditionsEntity && expeditionsEntity.length > 0; else notFound" class="table table-striped card-table table-hover table table-mobile-md">
+  <thead class="table-light field-font-header">
+  <tr>
+    <th>{{'mvtStock.num' | translate}}</th>
+    <th>{{"expedition.numero_exp" | translate}}</th>
+    <th>{{"expedition.date_exp" | translate}}</th>
+    <th>{{"expedition.quantite_exp" | translate}}</th>
+    <th>{{"expedition.quantite_recue" | translate}}</th>
+    <th>{{"expedition.quantite_retourne" | translate}}</th>
+    <th>{{"expedition.quantite_restante" | translate}}</th>
+    <th>{{"expedition.magazin_exp" | translate}}</th>
+    <th>{{"expedition.magazin_recep" | translate}}</th>
+    <th>{{"expedition.agent_exp" | translate}}</th>
+    <th id="etatOperation" class="text-center">{{'expedition.etat' | translate}}</th>
+    <th id="etatReception" class="text-center">{{'sidebar.reception' | translate}}</th>
+
+    <th class="text-center" >Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let expedition of expeditionsEntity | paginate: { itemsPerPage: 10, currentPage: gridListings }; let i = index; trackBy: trackBy" [ngStyle]="{'background-color': isConfirm(expedition)}">
+
+    <td>{{i + 1}}</td>
+    <td>{{expedition?.numeroExpedition}}</td>
+    <td>{{expedition?.dateDebutExpedition | dateHourFormat}}</td>
+    <td>{{expedition?.quantiteExpedieTotal}}</td>
+    <td>{{expedition?.quantiteRecueTotal}}</td>
+    <td>{{expedition?.quantiteRetourneTotal}}</td>
+    <td>{{expedition?.quantiteRestanteTotal}}</td>
+    <td>{{expedition?.magasinExpediteur?.designation}}</td>
+    <td>{{expedition?.magasinRecepteur?.designation}}</td>
+    <td>{{expedition?.agent}}</td>
+    <td class="text-center td-padding">
+      <button  [disabled]="true" *ngIf = "expedition?.cloturer" class = "btn btn-sm btn-danger">{{"expedition.expedition_cloturer" | translate}}</button>
+      <button  [disabled]="true" *ngIf = "!expedition?.cloturer" class = "btn btn-sm btn-warning">{{"expedition.expedition_en_cours" | translate}}</button>
+    </td>
+    <td class="text-center" >
+      <button  [disabled]="true" *ngIf = "expedition?.quantiteRecueTotal == expedition?.quantiteExpedieTotal" class = "btn btn-sm btn-success">{{"expedition.expedition_recu" | translate}}</button>
+      <button  [disabled]="true" *ngIf = "expedition?.quantiteRecueTotal! > 0 && expedition?.quantiteRestanteTotal! > 0" class = "btn btn-sm btn-warning">{{"expedition.expedition_en_cours" | translate}}</button>
+      <button  [disabled]="true" *ngIf = "expedition?.quantiteRecueTotal == 0 && expedition?.quantiteRetourneTotal! == 0" class = "btn btn-sm btn-danger">{{"expedition.expedition_en_attente" | translate}}</button>
+      <button  [disabled]="true" *ngIf = "expedition?.quantiteRetourneTotal! > 0 && expedition?.quantiteRecueTotal! >=0" class = "btn btn-sm btn-info">{{'expedition.expedition_retourne' | translate}}</button>
+    </td>
+    <td class="text-center">
+      <div class="dropdown">
+        <button class="btn btn-sm button-color dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+          Actions
+        </button>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item pointer" (click)="updateExpedition(expedition)" *ngIf="!expedition?.cloturer">
+            {{'button.edit' | translate}}
+          </a>
+          <div class="dropdown-divider" *ngIf="!expedition?.cloturer"></div>
+          <a class="dropdown-item pointer" (click)="openDetails(expedition)">
+            {{'button.detail' | translate}}
+          </a>
+          <div class="dropdown-divider" *ngIf="expedition?.cloturer && !expedition?.recu"></div>
+            <app-actif-actions *ngIf="expedition?.cloturer && !expedition?.recu" (newEvent)="retourStock(expedition)" [message]="'expedition.retour_modal_message'"
+                               [isRetour]="!expedition.recu!" ></app-actif-actions>
+          <div class="dropdown-divider" *ngIf="expedition?.cloturer" ></div>
+          <a class="dropdown-item pointer" *ngIf="expedition?.cloturer" (click)="printRapportExpedition(expedition.id)">
+            {{'button.imprimer' | translate}}
+          </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<div *ngIf="expeditionsEntity">
+  <div class="pagination-area text-center">
+    <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+  </div>
+</div>
+

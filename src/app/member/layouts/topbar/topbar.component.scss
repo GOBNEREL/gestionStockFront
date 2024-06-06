@@ -1,0 +1,56 @@
+.rounded-circle-flag {
+  border-radius: 50% !important;
+  width: 30%;
+  height: 100%;
+}
+.noti-footer{
+  background-color:#ecf0f5
+}
+.notification:hover{
+  border: 2px white;
+  background-color:#ffddff;
+}
+.noti-head{
+  background-color:#222d32
+}
+.size1
+{
+  font-size: 14px;
+}
+.size1contain
+{
+  font-size: 12px;
+}
+
+.size
+{
+  font-size: 10px;
+
+}
+
+.l1{
+  display: inline-flex;
+}
+.l5{
+  cursor: pointer;
+}
+.noti-footer {
+  border-top: 1px solid #f1f1f1;
+  padding: 15px 20px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+
+}
+.noti-body {
+  padding: 0;
+  position: relative;
+  height: 300px;
+}
+.noti-head {
+  padding: 15px 20px;
+}
+
+.notification{
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+}

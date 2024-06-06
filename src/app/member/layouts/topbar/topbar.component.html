@@ -1,0 +1,146 @@
+<!-- ======= Topbar ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a [routerLink]="['/member/dashboard']" class="logo d-flex align-items-center">
+      <img loading="lazy" src="{{logo_care_cameroon}}" alt="logo"  width="150" height="70">
+    </a>
+    <em class="bi bi-list toggle-sidebar-btn" (click)="toggle()"></em>
+  </div><!-- End Logo -->
+
+  <div class="search-bar fw-bolder field-font text-center">
+      <!-- {{userDto?.structure?.nom}} -->
+  </div>
+
+
+
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+
+
+      <!------------------------------------>
+
+      <li class="nav-item  pe-4 me-5 pt-3"  >
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile pt-0 " >
+
+          <li style="width:450px; " >
+            <div class="noti-head pe-3 ps-3" >
+              <h6 class="d-inline-block  m-b-0" style="color:#ff771d !important">{{'notification.notification' | translate}}</h6>
+            </div>
+                  <ul class="noti-body ">
+                    <li class="n-title mt-3 me-3 ms-3">
+                      <h6 class="m-b-0">{{'nouveaux' | translate}}</h6>
+                    </li>
+                  </ul>
+        </ul>
+
+      </li>
+
+      <!------------------------------------>
+
+
+      <li class="nav-item dropdown pe-3 me-1">
+
+      <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" href="javascript:void(0)">
+        <img *ngIf="flag[0] === 'assets/french.jpg'" src="{{contry_flag_fr}}" alt="flag" class="rounded-circle-flag">
+        <span class="d-none d-md-block dropdown-toggle ps-2" *ngIf="countryName[0] === 'French'">{{'french' | translate}}</span>
+        <img *ngIf="flag[0] === 'assets/us.svg'" src="{{contry_flag_us}}" alt="flag" class="rounded-circle-flag">
+        <span class="d-none d-md-block dropdown-toggle ps-2" *ngIf="countryName[0] === 'English'">{{'english' | translate}}</span>
+      </a><!-- End Language Iamge Icon -->
+
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile pt-3">
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center p-1" href="javascript:void(0)"
+             *ngFor="let item of listLang"
+             (click)="setLanguage(item.text, item.flag, item.lang)"
+             [ngClass]="{'active': langStoreValue === item.lang}">
+            <img class="rounded-circle-flag me-3" style="width: 50px; height: 50px" src="{{item.flag}}"
+                 alt="...">
+            <span class="fw-bold">{{item.text}}</span>
+          </a>
+        </li>
+
+      </ul><!-- End Language Dropdown Items -->
+    </li><!-- End Languag
+
+
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" href="javascript:void(0)">
+          <img *ngIf="flag[0] === 'assets/img/flags/french.svg'" src="{{contry_flag_fr}}" alt="flag" class="rounded-circle-flag">
+          <span class="d-none d-md-block dropdown-toggle ps-2" *ngIf="countryName[0] === 'French'">{{'french' | translate}}</span>
+          <img *ngIf="flag[0] === 'assets/img/flags/us.svg'" src="{{contry_flag_us}}" alt="flag" class="rounded-circle-flag">
+          <span class="d-none d-md-block dropdown-toggle ps-2" *ngIf="countryName[0] === 'English'">{{'english' | translate}}</span>
+        </a>End Language Iamge Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile pt-3">
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center p-1" href="javascript:void(0)"
+               *ngFor="let item of listLang"
+               (click)="setLanguage(item.text, item.flag, item.lang)"
+               [ngClass]="{'active': langStoreValue === item.lang}">
+              <img class="rounded-circle-flag me-3" style="width: 50px; height: 50px" src="{{item.flag}}"
+                   alt="...">
+              <span class="fw-bold">{{item.text}}</span>
+            </a>
+          </li>
+
+        </ul><!-- End Language Dropdown Items -->
+
+
+      <li class="nav-item dropdown pe-3 me-5">
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="javascript:void(0)" data-bs-toggle="dropdown">
+          <img loading="lazy"  src="{{undraw_profile}}" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{userDto?.nom}}</span>
+        </a><!-- End Profile Iamge Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>{{userDto?.nom}}</h6>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+         <li>
+            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" (click)="detailUserModal(userDto)">
+              <i class="bi bi-person"></i>
+              <span>{{'view_profile' | translate}}</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" (click)="changePassword(userDto?.login)">
+              <i class="bi bi-gear"></i>
+              <span>{{'update_password' | translate}}</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <app-actif-actions (newEvent)="logout()"
+                               [message]="'logout.select_message'"
+                               [readonly]="false" [islogout]="true"></app-actif-actions>
+          </li>
+
+<!--------->
+
+
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End of Topbar -->

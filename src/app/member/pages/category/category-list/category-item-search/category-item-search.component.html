@@ -1,0 +1,73 @@
+<div class="content mb-2">
+    <div class="container-fluid pe-0 ps-0">
+      <div class="card shadow card-solid">
+        <div class="card-header card-header-padding">
+          <div class="float-start p-0">
+            <h5 class="font-weight-bold mt-1 ms-2">{{'category.search' | translate}}</h5>
+          </div>
+
+          <div class="float-end">
+            <button class="btn btn-sm button-color" (click)="refresh()">
+              <span class="bi bi-search"></span>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="searchForm">
+
+                <div class="row">
+
+
+                  <div *ngIf="isActif" class="col-md-3 mb-3">
+                    <div class="form-group">
+                      <label class="control-label field-font">
+                        {{'category.status' | translate}}
+                      </label>
+                      <ng-select [searchable]="false" [clearable]="true" placeholder="{{'category.selectMessage' | translate}}" class="control-label" formControlName="status">
+                        <ng-option [value]="true">{{'category.isActif' | translate}}</ng-option>
+                        <ng-option [value]="false">{{'category.isNotActif' | translate}}</ng-option>
+                        <ng-option [value]="''">{{'category.Tout_Afficher' | translate}}</ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div *ngIf="isclassement" class="col-md-3 mb-3">
+                    <div class="form-group">
+                      <label class="control-label field-font">
+                        {{'category.Classement' | translate}}
+                      </label>
+                      <ng-select [searchable]="false" [clearable]="true" placeholder="{{'category.selectMessage' | translate}}" class="control-label" formControlName="classement">
+                        <ng-option [value]="1">{{'category.Croissant' | translate}}</ng-option>
+                        <ng-option [value]="0">{{'category.Decroissant' | translate}}</ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div  *ngIf="isNombreDeResultat" class="col-md-3 mb-3">
+                    <div class="form-group">
+                      <label class="control-label field-font">
+                        {{'category.resultMax' | translate}}
+                      </label>
+                      <select class="form-select" formControlName="nombreDeResultat">
+                        <option value="10">10</option>
+                        <option value="10">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="tous">{{'category.tous' | translate}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

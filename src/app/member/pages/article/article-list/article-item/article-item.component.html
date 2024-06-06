@@ -1,0 +1,46 @@
+<div [class]="articleDtos.length > 0 ? 'm-0' : 'p-3'">
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <span>{{'article.notFound' | translate}}</span>
+      </div>
+    </ng-template>
+
+  <table class="table table-striped card-table table-hover table table-mobile-md"
+         *ngIf="articleDtos && articleDtos.length > 0; else notFound">
+    <thead class="table-light  field-font-header">
+    <tr>
+      <th id="Numero">{{'article.numero' | translate}}</th>
+      <th id="name">{{'article.name' | translate}}</th>
+      <th id="price">{{'article.price' | translate}}</th>
+      <th id="price">{{'article.category' | translate}}</th>
+      <th id="status">{{'article.status' | translate}}</th>
+      <th id="action">{{'article.Action' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let article of articleDtos | paginate: { itemsPerPage: 50, currentPage: gridListings }; let i=index; trackBy: trackBy">
+      <td>{{i+1}}</td>
+      <td>{{article.name != null ? article.name : '-'}}</td>
+      <td>{{article.price != null ? article.price : '-'}}</td>
+      <td>{{article.category != null ? article.category : '-'}}</td>
+      <td>
+        <app-actif-actions (newEvent)="changeStatus(article)" [entity]="'category'" [isActif]="article.status!"  [activation]="true"></app-actif-actions>
+      </td>
+
+      <td >
+        <div class="dropdown">
+          <button class="btn btn-sm button-color align-text-top pointer" (click)="updateModal(article)">
+            {{'button.edit' | translate}}
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="articleDtos">
+    <div class="pagination-area text-center">
+      <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+    </div>
+  </div>

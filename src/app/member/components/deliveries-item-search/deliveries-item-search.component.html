@@ -1,0 +1,91 @@
+<div class="content mb-2">
+  <div class="container-fluid pe-0 ps-0">
+    <div class="card shadow card-solid">
+      <div class="card-header card-header-padding">
+        <div class="float-start p-0">
+          <h5 class="font-weight-bold mt-1 ms-2">{{'search' | translate}}</h5>
+        </div>
+
+        <div class="float-end">
+          <button class="btn btn-sm button-color" (click)="refresh()">
+            <span class="bi bi-search"></span>
+          </button>
+        </div>
+      </div>
+      <div class="card-body" >
+
+        <div class="row">
+          <div class="col-md-12">
+            <form [formGroup]="searchForm">
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="form-group">
+                    <label class="control-label field-font">
+                      {{'deliveries.delivery-number' | translate}}
+                    </label>
+                    <input type="text" class="form-control p-1"  placeholder="{{'deliveries.delivery-number' | translate}}" formControlName="deliveryNumber">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label field-font">
+                      {{'deliveries.supplier_name' | translate}}
+                    </label>
+                    <input type="text" class="form-control"  placeholder="{{'deliveries.supplier_name' | translate}}" formControlName="supplierPhone">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label field-font">
+                      {{'deliveries.order' | translate}}
+                    </label>
+                    <ng-select [searchable]="false" [clearable]="true"  placeholder="{{'order' | translate}}" class="control-label" formControlName="order">
+                      <ng-option [value]="1">{{'order_croissant' | translate}}</ng-option>
+                      <ng-option [value]="0">{{'order_decroissant' | translate}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label field-font">
+                      {{'deliveries.delivery-date-before' | translate}}
+                    </label>
+                    <input type="date" class="form-control"  placeholder="{{'deliveries.delivery-date-before' | translate}}" formControlName="deliveryDateBefore">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label field-font">
+                      {{'deliveries.delivery-date-after' | translate}}
+                    </label>
+                    <input type="date" class="form-control"  placeholder="{{'deliveries.delivery-date-after' | translate}}" formControlName="deliveryDateAfter">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label field-font">
+                      {{'resultMax' | translate}}
+                    </label>
+                    <select class="form-control" formControlName="resultMax" >
+                      <option value="10">10</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                      <option value="200">200</option>
+                      <option value="500">500</option>
+                      <option value="1000">1000</option>
+                      <option value="-1">{{'tous' | translate}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+

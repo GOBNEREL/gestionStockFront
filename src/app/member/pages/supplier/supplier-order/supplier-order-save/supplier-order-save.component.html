@@ -1,0 +1,94 @@
+<form role="form" [formGroup]="supplierForm" novalidate (ngSubmit)="saveSupplierOrder()">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header p-1" *ngIf="!errorsMsg.length">
+        <h5 class="modal-title font-weight-bold" *ngIf="supplierOrderDto?.id == null"> {{'supplierOrder.add' | translate}}</h5>
+        <h5 class="modal-title font-weight-bold" *ngIf="supplierOrderDto?.id">{{'supplierOrder.edit' | translate}}</h5>
+        <button type="button" class="btn-close me-1 p-1" aria-label="Close" (click)="cancle()"></button>
+      </div>
+      <div class="modal-header p-1" *ngIf="errorsMsg.length">
+        <div class="p-3 alert alert-danger col-md-12" *ngIf="errorsMsg && errorsMsg.length > 0">
+          <button type="button" class="btn-close me-1 p-1 float-end" aria-label="Close" (click)="cancle()"></button>
+          <ng-container *ngFor="let error of errorsMsg">
+            <span class="d-block">{{error}}</span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            
+          <div class="form-group col-md-6 mb-3">
+            <label class="control-label field-font">{{'supplierOrder.supplier' | translate}}<span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+            <ng-select [searchable]="true" placeholder="{{'supplierOrder.selectMessage' | translate}}" [clearable]="true" class="control-label" name="supplierName" formControlName="supplierName" [id]="'categorySelected'" (input)="filterSupplier($event)" (clear)="onClearableSupplier()">
+              <ng-option *ngFor="let supplier of listSupplier$" [value]="supplier.name">{{ supplier.name}}</ng-option>
+            </ng-select>
+            <app-form-validation [form]="supplierForm"></app-form-validation>
+          </div>
+
+          <div class="form-group col-md-6 mb-3">
+            <label class="control-label field-font">{{'supplierOrder.article' | translate}}<span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+            <ng-select [searchable]="true" placeholder="{{'supplierOrder.selectMessage' | translate}}" [clearable]="true" class="control-label" name="article" formControlName="article" [id]="'articleSelected'" (input)="filterArticle($event)" (clear)="onClearableArticle()">
+              <ng-option *ngFor="let article of listArticle$" [value]="article.name">{{ article.name}}</ng-option>
+            </ng-select>
+            <app-form-validation [form]="supplierForm"></app-form-validation>
+          </div>
+
+
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="unitPrice"> {{'supplierOrder.unitPrice' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="number" class="form-control field-font-header p-1" name="unitPrice" id="unitPrice" placeholder="{{'supplierOrder.unitPriceMessage' | translate}}" formControlName="unitPrice"/>
+              <div *ngIf="supplierForm.get('unitPrice')?.invalid && (supplierForm.get('unitPrice')?.dirty || supplierForm.get('unitPrice')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="supplierForm.get('unitPrice')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="quantity"> {{'supplierOrder.quantity' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="number" class="form-control field-font-header p-1" name="quantity" id="quantity" placeholder="{{'supplierOrder.quantityMessage' | translate}}" formControlName="quantity"/>
+              <div *ngIf="supplierForm.get('quantity')?.invalid && (supplierForm.get('quantity')?.dirty || supplierForm.get('quantity')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="supplierForm.get('quantity')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="commandDate"> {{'supplierOrder.commandDate' | translate}} <span
+                class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="date" class="form-control field-font-header p-1" name="commandDate" id="commandDate"
+                     placeholder="{{'supplierOrder.commandDate' | translate}}" formControlName="commandDate"/>
+              <div
+                *ngIf="supplierForm.get('commandDate')?.invalid && (supplierForm.get('commandDate')?.dirty || supplierForm.get('commandDate')?.touched)">
+                <small class="form-text text-danger fw-bold validate-fields"
+                       *ngIf="supplierForm.get('commandDate')?.errors?.['required']">
+                </small>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-sm btn-secondary float-start" data-dismiss="modal" (click)="cancle()">
+              <em class="bi bi-stop-circle"></em>&nbsp;
+              <span>{{'button.cancel' | translate}}</span>
+            </button>
+            <button type="submit" [disabled]="isSaving || supplierForm.invalid" class="btn btn-sm float-end button-color" >
+              <em class="bi bi-save"></em>&nbsp;
+              <span>{{'button.save' | translate}}</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+

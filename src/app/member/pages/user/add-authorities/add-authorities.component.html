@@ -1,0 +1,32 @@
+<form [formGroup]="userRoleAddForm" (submit)="addAuthorities()" novalidate="novalidate" >
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title font-weight-bold">{{'user.add_role' | translate}} {{userDto.login}}</h3>
+      <button type="button" class="btn-close me-1 p-1" data-dismiss="modal" aria-label="Close" (click)="exit()"></button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid ">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="control-label field-font pb-1">{{'user.role_of_user' | translate}} ({{authorityOfUser.length}})</h5>
+            <select class="selectpicker form-select 13" multiple data-live-search="true" size="5%" style="width: 100%" formControlName="listRoles">
+              <option *ngFor="let roleUser of authorityToAdd" [value]="roleUser">{{roleUser}}</option>
+            </select>
+          </div>
+
+<!--          <div class="col-md-6">-->
+<!--            <h5 class="control-label field-font pb-1">{{'user.role_add' | translate}} ({{authorityToAdd.groupesRoles?.length}})</h5>-->
+<!--            <select id="mon-select" class="selectpicker form-select" multiple data-live-search="true" size="20%" style="width: 100%" formControlName="listRoles" >-->
+<!--              <option *ngFor="let groupesRole of authorityToAdd.groupesRoles" [value]="groupesRole.roles?.nom">{{groupesRole.roles?.nom}}</option>-->
+<!--            </select>-->
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="exit()">{{'button.cancel' | translate}}</button>
+      <button type="submit" class="btn btn-sm button-color">{{'button.save' | translate}}</button>
+    </div>
+  </div>
+</form>

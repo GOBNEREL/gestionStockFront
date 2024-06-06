@@ -1,0 +1,42 @@
+<form>
+  <div class="modal-content">
+    <div class="modal-header" style="padding: 10px 10px 10px 10px">
+      <h5 class="modal-title font-weight-bold">{{'user.list_role' | translate}} {{userDto.login}}</h5>
+      <button type="button" class="btn-close me-1 p-1" data-dismiss="modal" aria-label="Close"
+              (click)="exit()"></button>
+    </div>
+    <div class="" [class]="authorityOfUser.length > 0 ? 'modal-body p-0' : 'modal-body'">
+
+      <ng-template #isEmpty>
+        <div class="alert alert-warning">
+          <span>{{'user.roles_is_empty' | translate}}</span>
+        </div>
+         
+      </ng-template>
+
+      <table class="table table-striped card-table table-hover table table-mobile-md"
+             *ngIf="authorityOfUser.length > 0; else isEmpty">
+        <thead class="table-light">
+        <tr>
+          <th id="number">{{'user.number' | translate}}</th>
+          <th id="user">{{'user.role' | translate}}</th>
+          <th id="action" class="text-center">{{'action' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let role of authorityOfUser; let i = index; trackBy: trackBy">
+          <td>{{i + 1}}</td>
+          <td>{{role != null ? role : '-'}}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-danger" (click)="deleteRoleUser(role)">
+              {{'button.delete' | translate}}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</form>

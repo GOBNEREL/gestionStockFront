@@ -1,0 +1,52 @@
+<div [class]="supplierDtos.length > 0 ? 'm-0' : 'p-3'">
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <span>{{'supplier.notFound' | translate}}</span>
+      </div>
+    </ng-template>
+
+  <table class="table table-striped card-table table-hover table table-mobile-md"
+         *ngIf="supplierDtos && supplierDtos.length > 0; else notFound">
+    <thead class="table-light  field-font-header">
+    <tr>
+      <th id="Numero">{{'supplier.numero' | translate}}</th>
+      <th id="name">{{'supplier.name' | translate}}</th>
+      <th id="phoneNumber">{{'supplier.phone' | translate}}</th>
+      <th id="status">{{'supplier.status' | translate}}</th>
+      <th id="action">{{'supplier.Action' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let supplier of supplierDtos | paginate: { itemsPerPage: 50, currentPage: gridListings }; let i=index; trackBy: trackBy">
+      <td>{{i+1}}</td>
+      <td>{{supplier.name != null ? supplier.name : '-'}}</td>
+      <td>{{supplier.phoneNumber != null ? supplier.phoneNumber : '-'}}</td>
+      <td>
+        <app-actif-actions (newEvent)="changeStatus(supplier)" [entity]="'category'" [isActif]="supplier.status!"  [activation]="true"></app-actif-actions>
+      </td>
+
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-sm button-color dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+            {{'button.Action' | translate}}
+          </button>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item pointer" (click)="updateModal(supplier)">
+              {{'button.edit' | translate}}
+            </a>
+            <a class="dropdown-item pointer" (click)="detailModal(supplier)">
+              {{'button.detail' | translate}}
+            </a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="supplierDtos">
+    <div class="pagination-area text-center">
+      <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+    </div>
+  </div>

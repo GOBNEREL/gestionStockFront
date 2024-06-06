@@ -1,0 +1,28 @@
+
+<div id="wrapper">
+
+
+  <router-outlet name="topbar"></router-outlet>
+
+  <!-- Content router-outler sidebar page content Start -->
+  <router-outlet name="sidebar"></router-outlet>
+  <!-- Content router-outler sidebar page content End -->
+
+
+  <!-- Main Content -->
+  <main id="main" class="main">
+
+    <router-outlet></router-outlet>
+
+  </main>
+  <!-- End of Main Content -->
+
+  <router-outlet name="scrolltotop"></router-outlet>
+
+  <!-- Content router-outler footer page content Start -->
+  <router-outlet name="footer"></router-outlet>
+  <!-- Content router-outler footer page content End -->
+
+</div>
+
+

@@ -1,0 +1,45 @@
+<form role="form" [formGroup]="customerForm" novalidate (ngSubmit)="saveCustomer()">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header p-1" *ngIf="!errorsMsg.length">
+        <h5 class="modal-title font-weight-bold" *ngIf="customerDto?.id">{{'customer.details' | translate}}</h5>
+        <button type="button" class="btn-close me-1 p-1" aria-label="Close" (click)="cancle()"></button>
+      </div>
+      <div class="modal-header p-1" *ngIf="errorsMsg.length">
+        <div class="p-3 alert alert-danger col-md-12" *ngIf="errorsMsg && errorsMsg.length > 0">
+          <button type="button" class="btn-close me-1 p-1 float-end" aria-label="Close" (click)="cancle()"></button>
+          <ng-container *ngFor="let error of errorsMsg">
+            <span class="d-block">{{error}}</span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="CustomerName"> {{'customer.name' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span> </label>
+              <input type="text" class="form-control field-font-header p-1" name="name" style="font-weight: bolder;" id="CustomerName" placeholder="{{customerDto.name}}" disabled/>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label class="control-label field-font pb-1" for="CustomerPhoneNumber"> {{'customer.phoneNumber' | translate}} </label>
+              <input type="number" class="form-control field-font-header p-1" style="font-weight: bolder;" placeholder="{{customerDto.phoneNumber}}" name="phoneNumber" id="CustomerPhoneNumber" disabled/>
+            </div>
+          </div>
+
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-sm btn-secondary float-start" data-dismiss="modal" (click)="cancle()">
+              <em class="bi bi-stop-circle"></em>&nbsp;
+              <span>{{'button.cancel' | translate}}</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+

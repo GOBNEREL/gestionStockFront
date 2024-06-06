@@ -1,0 +1,42 @@
+<div [class]="categoryDtos.length > 0 ? 'm-0' : 'p-3'">
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <span>{{'category.notFound' | translate}}</span>
+      </div>
+    </ng-template>
+
+  <table class="table table-striped card-table table-hover table table-mobile-md"
+         *ngIf="categoryDtos && categoryDtos.length > 0; else notFound">
+    <thead class="table-light  field-font-header">
+    <tr>
+      <th id="Numero">{{'category.numero' | translate}}</th>
+      <th id="name">{{'category.name' | translate}}</th>
+      <th id="status">{{'category.status' | translate}}</th>
+      <th id="action">{{'category.Action' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let category of categoryDtos | paginate: { itemsPerPage: 50, currentPage: gridListings }; let i=index; trackBy: trackBy">
+      <td>{{i+1}}</td>
+      <td>{{category.name != null ? category.name : '-'}}</td>
+      <td>
+        <app-actif-actions (newEvent)="changeStatus(category)" [entity]="'category'" [isActif]="category.status!"  [activation]="true"></app-actif-actions>
+      </td>
+
+      <td >
+        <div class="dropdown">
+          <button class="btn btn-sm button-color align-text-top pointer" (click)="updateModal(category)">
+            {{'button.edit' | translate}}
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="categoryDtos">
+    <div class="pagination-area text-center">
+      <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+    </div>
+  </div>

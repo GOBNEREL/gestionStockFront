@@ -1,0 +1,97 @@
+<!--<app-pagetitle [pagetitle]="'sidebar.users'" [first]="'sidebar.users'" [second]="'user.add_user'" [isActifFirst]="false"-->
+<!--               [isActifSecond]="true">-->
+
+<!--</app-pagetitle>-->
+
+<section class="section dashboard">
+  <div class="row">
+    <div class="container-fluid">
+      <form role="form" [formGroup]="userForm" novalidate="novalidate">
+        <div class="card" data-backdrop="false">
+          <div class="modal-header p-1" *ngIf="!errorMsg.length">
+            <h5 class="card-title field-font pb-1 float-start">
+              {{'user.add_user' | translate}}
+            </h5>
+          <button type="button" class="btn-close me-1 p-1" aria-label="Close" (click)="cancle()"></button>
+          </div>
+          <div class="modal-header p-1" *ngIf="errorMsg.length">
+            <div class="p-3 alert alert-danger col-md-12" *ngIf="errorMsg && errorMsg.length > 0">
+              <button type="button" class="btn-close me-1 p-1 float-end" aria-label="Close" (click)="cancle()"></button>
+              <ng-container *ngFor="let error of errorMsg">
+                <span class="d-block">{{error}}</span>
+              </ng-container>
+            </div>
+          </div>
+
+
+          <div class="card-body">
+            <div class="container-fluid">
+              <div class="alert alert-danger" *ngIf="errorMsg && errorMsg.length > 0">
+                <div *ngFor="let msg of errorMsg">
+                  <span>- {{msg}}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                  <label class="control-label field-font pb-1" for="login">
+                    {{'user.login' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+                  <input type="text" id="login" class="form-control" formControlName="login">
+                  <app-form-validation [form]="userForm"
+                                       [field]="'login'"
+                                       [minlength]="true"
+                                       [maxlength]="true"
+                                       [message]="'field_control.check_login'"
+                                       [messageMinlength]="'field_control.check_min_login'"
+                                       [messageMaxlength]="'field_control.check_max_login'"></app-form-validation>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                  <label class="control-label field-font pb-1" for="name">
+                    {{'user.name' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span></label>
+                  <input type="text" name="name" id="name" class="form-control" formControlName="name">
+                  <app-form-validation [form]="userForm"
+                                       [field]="'name'"
+                                       [message]="'field_control.check_nom'">
+
+                  </app-form-validation>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                  <label class="control-label field-font pb-1" for="phone">
+                    {{'user.phone' | translate}} <span class="text-danger fw-bold pt-0 fs-5">*</span>
+                  </label>
+                  <input type="text" name="phone" id="phone" class="form-control"
+                         formControlName="phone">
+                  <app-form-validation [form]="userForm"
+                                       [field]="'phone'"
+                                       [message]="'field_control.check_telephone'">
+
+                  </app-form-validation>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                  <label class="control-label field-font pb-1" for="email">
+                    {{'user.email' | translate}}</label>
+                  <input type="text" id="email" class="form-control" formControlName="email">
+                  <app-form-validation [form]="userForm"
+                                       [field]="'email'"
+                                       [message]="'field_control.check_email'">
+
+                  </app-form-validation>
+                </div>
+
+              </div>
+            </div>
+          </div>
+           <div class="card-footer">
+          <button class="btn btn-sm btn-secondary" type="reset" data-dismiss="card" (click)="exit()">
+            <em class="bi bi-stop-circle"></em>&nbsp; {{'button.cancel' | translate}}
+          </button>
+          <button class="btn btn-sm button-color m-3"  type="submit"
+                  (click)="saveUser()">
+            <em class="bi bi-save"></em>    {{'button.save' | translate}}
+          </button>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

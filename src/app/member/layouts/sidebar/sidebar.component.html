@@ -1,0 +1,129 @@
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <div class="user-sidebar mb-2" data-bs-target="#user-nav" data-bs-toggle="collapse" style="cursor: pointer">
+    <div class="float-start image">
+      <img loading="lazy" src="{{undraw_profile}}" class="img-sidebar-circle" alt="User Image">
+    </div>
+    <div class="info float-end">
+      <p>{{userDto?.nom}}</p>
+      <a><em class="bi bi-circle-fill align-self-start text-success"></em> {{'user.en_ligne' | translate}}</a>
+    </div>
+  </div>
+
+  <ul id="user-nav" class="sidebar-nav collapse mb-2" data-bs-parent="#sidebar">
+    <!-- <li class="nav-item">
+      <a class="nav-link collapsed" href="javascript:void(0)">
+        <em class="bi bi-person me-2"></em>
+        <span>{{'view_profile' | translate}}</span>
+      </a>
+    </li> -->
+    <li class="nav-item">
+      <hr class="dropdown-divider">
+    </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link collapsed" href="javascript:void(0)" (click)="changePassword(userDto?.login)"
+             [routerLinkActive]="['active']">
+            <em class="bi bi-gear me-2"></em>
+            <span>{{'update_password' | translate}}</span>
+          </a>
+        </li>
+
+    <li class="nav-item">
+      <hr class="dropdown-divider">
+    </li>
+    <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link collapsed" href="javascript:void(0)" (click)="logout()" [routerLinkActive]="['active']">
+        <em class="bi bi-box-arrow-right me-2"></em>
+        <span>{{'button.logout' | translate}}</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <ng-container *ngFor="let menu of menus">
+
+      <ng-container *appHasAnyService="menu.service">
+        <ng-container *ngIf="menu?.submenu?.length === 0">
+          <li *appHasAnyAuthority="menu.roles" class="nav-item" [routerLinkActive]="['active']">
+            <a [routerLinkActive]="['active']" class="nav-link collapsed" routerLink="{{'../member/'+menu?.path}}" (click)="shouldActivateLink(menu?.path)"
+               href="javascript:void(0)" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="{{menu?.icon}}"></i>
+              <span>{{menu?.menu + '' | translate}}</span>
+            </a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="menu?.submenu?.length !== 0">
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a [routerLinkActive]="['active']" class="nav-link collapsed" [attr.data-bs-target]="'#' + menu.data_target"
+               data-bs-toggle="collapse" href="javascript:void(0)">
+              <i class="{{menu?.icon}}"></i><span>{{menu?.menu + '' | translate}}</span><i
+              class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul [id]="menu.data_target" class="nav-content collapse " *ngFor="let submenu of menu.submenu">
+              <ng-container *appHasAnyService="submenu.service">
+                <ng-container *ngIf="!submenu.undersubmenu">
+                  <li *appHasAnyAuthority="submenu.roles" [routerLinkActive]="['active']">
+                    <a [routerLinkActive]="['active']" [routerLink]="'../member/'+submenu?.path" href="javascript:void(0)"
+                       [routerLinkActiveOptions]="{ exact: true }">
+                      <i class="{{submenu?.icon}}"></i><span>{{submenu?.menu + '' | translate}}</span>
+                    </a>
+                  </li>
+                </ng-container>
+
+
+                <ng-container *ngIf="submenu.undersubmenu">
+
+                  <li class="nav-item" [routerLinkActive]="['active']">
+                    <a [routerLinkActive]="['active']" [attr.data-bs-target]="'#' +submenu.data_target"
+                       href="javascript:void(0)" data-bs-toggle="collapse">
+                      <i class="{{submenu?.icon}}"></i><span>{{submenu?.menu + '' | translate}}</span><i
+                      class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+
+                    <ul [routerLinkActive]="['active']" class="collapse" *ngFor="let under of submenu.undersubmenu"
+                        [id]="submenu.data_target">
+                      <ng-container *appHasAnyService="under.service">
+                        <li *appHasAnyAuthority="under.roles" [routerLinkActive]="['active']">
+                          <a [routerLinkActive]="['active']" [routerLink]="'../member/'+under?.path" href="javascript:void(0)"
+                             [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="{{under?.icon}}"></i><span>{{under?.menu + '' | translate}}</span>
+                          </a>
+                        </li>
+                      </ng-container>
+                      <ng-container *ngIf="under.block">
+                        <li class="nav-item" [routerLinkActive]="['active']">
+                          <a [routerLinkActive]="['active']" [attr.data-bs-target]="'#' +under.data_target"
+                             href="javascript:void(0)" data-bs-toggle="collapse">
+                            <i class="{{under?.icon}}"></i><span>{{under?.menu + '' | translate}}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                          </a>
+
+                          <ul [routerLinkActive]="['active']" class="collapse" *ngFor="let block of under.block"
+                              [id]="under.data_target">
+                            <ng-container *appHasAnyService="block.service">
+                              <li *appHasAnyAuthority="block.roles" [routerLinkActive]="['active']">
+                                <a [routerLinkActive]="['active']" [routerLink]="'../member/'+block?.path" href="javascript:void(0)"
+                                   [routerLinkActiveOptions]="{ exact: true }">
+                                  <i class="{{block?.icon}}"></i><span>{{block?.menu + '' | translate}}</span>
+                                </a>
+                              </li>
+                            </ng-container>
+                          </ul>
+                      </ng-container>
+                    </ul>
+                  </li>
+                </ng-container>
+              </ng-container>
+
+            </ul>
+          </li>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+  </ul>
+
+</aside><!-- End Sidebar-->

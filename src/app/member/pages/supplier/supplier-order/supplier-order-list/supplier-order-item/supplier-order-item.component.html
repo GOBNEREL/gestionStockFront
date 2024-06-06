@@ -1,0 +1,41 @@
+<div [class]="supplierOrderDtos.length > 0 ? 'm-0' : 'p-3'">
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <span>{{'supplierOrder.notFound' | translate}}</span>
+      </div>
+    </ng-template>
+
+  <table class="table table-striped card-table table-hover table table-mobile-md"
+         *ngIf="supplierOrderDtos && supplierOrderDtos.length > 0; else notFound">
+    <thead class="table-light  field-font-header">
+    <tr>
+      <th id="Numero">{{'supplierOrder.numero' | translate}}</th>
+      <th id="name">{{'supplierOrder.supplierName' | translate}}</th>
+      <th id="price">{{'supplierOrder.article' | translate}}</th>
+      <th id="price">{{'supplierOrder.quantity' | translate}}</th>
+      <th id="price">{{'supplierOrder.totalPrice' | translate}}</th>
+      <th id="price">{{'supplierOrder.commandDate' | translate}}</th>
+      <th id="status">{{'supplierOrder.status' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let supplierOrder of supplierOrderDtos | paginate: { itemsPerPage: 50, currentPage: gridListings }; let i=index; trackBy: trackBy">
+      <td>{{i+1}}</td>
+      <td>{{supplierOrder.supplierName != null ? supplierOrder.supplierName : '-'}}</td>
+      <td>{{supplierOrder.article != null ? supplierOrder.article : '-'}}</td>
+      <td>{{supplierOrder.quantity != null ? supplierOrder.quantity : '-'}}</td>
+      <td>{{supplierOrder.totalPrice != null ? supplierOrder.totalPrice : '-'}}</td>
+      <td>{{supplierOrder.commandDate == null ? '-' : supplierOrder.commandDate | dateFormat}}</td>
+      <td>
+        <app-actif-actions (newEvent)="changeStatus(supplierOrder)" [entity]="'order'" [isActif]="supplierOrder.status!"  [activation]="true"></app-actif-actions>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="supplierOrderDtos">
+    <div class="pagination-area text-center">
+      <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+    </div>
+  </div>

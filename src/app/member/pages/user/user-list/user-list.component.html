@@ -1,0 +1,27 @@
+<app-pagetitle [pagetitle]="'sidebar.users'" [first]="'sidebar.users'" [isActifFirst]="true"></app-pagetitle>
+<section class="section dashboard">
+  <div class="row">
+    <div class="container-fluid">
+      <app-button-actions (newEvent)="openModalUser()" [buttonName]="'user.add_user' | translate"></app-button-actions>
+
+      <app-user-item-search (searchUserEvent)="handleSearch($event)"></app-user-item-search>
+
+      <ng-container *ngIf="(users$ | async) as users">
+
+        <div class="card shadow mb-4 p-0">
+          <div class="card-header py-3">
+            <h6 class="float-start m-0 mt-1 font-weight-bold">{{'user.list' | translate}}</h6>
+            <span class="ms-2 badge button-color"> ({{users.length}})</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="alert alert-danger" *ngIf="errorMsg">
+              {{ errorMsg }}
+            </div>
+            <app-user-item [userDtos]="users" (updateResult)="handleUpdate($event)"></app-user-item>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
+

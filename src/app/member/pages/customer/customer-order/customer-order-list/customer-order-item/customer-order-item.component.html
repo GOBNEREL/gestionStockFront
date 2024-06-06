@@ -1,0 +1,41 @@
+<div [class]="customerOrderDtos.length > 0 ? 'm-0' : 'p-3'">
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <span>{{'customerOrder.notFound' | translate}}</span>
+      </div>
+    </ng-template>
+
+  <table class="table table-striped card-table table-hover table table-mobile-md"
+         *ngIf="customerOrderDtos && customerOrderDtos.length > 0; else notFound">
+    <thead class="table-light  field-font-header">
+    <tr>
+      <th id="Numero">{{'customerOrder.numero' | translate}}</th>
+      <th id="name">{{'customerOrder.customerName' | translate}}</th>
+      <th id="price">{{'customerOrder.article' | translate}}</th>
+      <th id="price">{{'customerOrder.quantity' | translate}}</th>
+      <th id="price">{{'customerOrder.totalPrice' | translate}}</th>
+      <th id="price">{{'customerOrder.commandDate' | translate}}</th>
+      <th id="status">{{'customerOrder.status' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let customerOrder of customerOrderDtos | paginate: { itemsPerPage: 50, currentPage: gridListings }; let i=index; trackBy: trackBy">
+      <td>{{i+1}}</td>
+      <td>{{customerOrder.customerName != null ? customerOrder.customerName : '-'}}</td>
+      <td>{{customerOrder.article != null ? customerOrder.article : '-'}}</td>
+      <td>{{customerOrder.quantity != null ? customerOrder.quantity : '-'}}</td>
+      <td>{{customerOrder.totalPrice != null ? customerOrder.totalPrice : '-'}}</td>
+      <td>{{customerOrder.commandDate == null ? '-' : customerOrder.commandDate | dateFormat}}</td>
+      <td>
+        <app-actif-actions (newEvent)="changeStatus(customerOrder)" [entity]="'order'" [isActif]="customerOrder.status!"  [activation]="true"></app-actif-actions>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="customerOrderDtos">
+    <div class="pagination-area text-center">
+      <pagination-controls (pageChange)="gridListings = $event"></pagination-controls>
+    </div>
+  </div>

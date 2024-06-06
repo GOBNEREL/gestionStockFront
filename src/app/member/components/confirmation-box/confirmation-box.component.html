@@ -1,0 +1,27 @@
+<div class="modal-content">
+  <div class="modal-header p-1">
+    <h5 class="modal-title font-weight-bold">{{'return.info' | translate}}</h5>
+    <button (click)="cancle()" aria-label="Close" class="btn-close me-1 p-1" type="button"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <h3>{{message}}</h3>
+
+      <h5 *ngFor="let item of text">{{ item }}</h5>
+    </div>
+  </div>
+  <div class="modal-footer p-1">
+    <button (click)="cancle()" class="btn btn-sm btn-secondary float-start" data-dismiss="modal" type="button">
+      <em class="bi bi-stop-circle"></em>&nbsp;
+      <span>{{'button.cancel' | translate}}</span>
+    </button>
+    <button class="btn btn-sm float-end button-color" (click)="save()" type="submit">
+      <em class="bi bi-save"></em>&nbsp;
+      <span>{{'button.save' | translate}}</span>
+    </button>
+  </div>
+
+
+</div>
+
